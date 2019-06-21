@@ -1,9 +1,2 @@
-FROM golang:alpine
-WORKDIR /escapade
-COPY go.mod .
-COPY go.sum .
-RUN apk add --update git
-RUN apk add --update bash && rm -rf /var/cache/apk/*
-RUN go mod download
-COPY . .
+FROM escapade_golang:latest
 RUN go build -o bin/history history/main.go

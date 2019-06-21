@@ -1,5 +1,10 @@
 version: '3'
 services:
+  golang:
+    build: 
+      dockerfile: ./internal/golang.dockerfile
+      context: .
+
   pg:
     image: postgres:11.2-alpine
     environment:
@@ -15,8 +20,9 @@ services:
       dockerfile: ./api/Dockerfile
       context: .
     depends_on:
-      - "pg"
+      - "golang"
       - "auth"
+      - "pg"
     ports:
       - 3001:3001
     environment:
@@ -31,6 +37,7 @@ services:
       context: .
     depends_on:
       - "redis"
+      - "golang"
     ports:
       - 3333:3333
     environment:
@@ -43,8 +50,9 @@ services:
       dockerfile: ./game/Dockerfile
       context: .
     depends_on:
-       - "pg"
-       - "auth"
+      - "golang"
+      - "auth"
+      - "pg"
     ports:
       - 3002:3002
     environment:
@@ -58,6 +66,7 @@ services:
       dockerfile: ./history/Dockerfile
       context: .
     depends_on:
+      - "golang"
       - "pg"
       - "auth"
     ports:

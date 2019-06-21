@@ -4,7 +4,7 @@ branches:
   only: [ master ]
 
 script:
-- docker-compose build
+- docker-compose -p escapade build
 
 after_success:
 - sh succes.sh

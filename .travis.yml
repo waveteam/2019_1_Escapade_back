@@ -1,6 +1,5 @@
 sudo: required
 services: [ docker ]
-language: go
 branches: 
   only: [ master ]
 

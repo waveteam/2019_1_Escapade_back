@@ -1,13 +1,11 @@
 version: '3'
 services:
-
   pg:
-    
     image: postgres:11.2-alpine
     environment:
-      POSTGRES_USER: 'docker'
-      POSTGRES_PASSWORD: 'docker'
-      POSTGRES_DB: 'docker'
+      POSTGRES_USER:      'docker'
+      POSTGRES_PASSWORD:  'docker'
+      POSTGRES_DB:        'docker'
 
   redis:
     image: redis
@@ -74,16 +72,13 @@ services:
     build:
       dockerfile: ./Dockerfile
       context: ./prometheus
-    # image: prom/prometheus:latest
     container_name: prometheus
-    # volumes:
-    #   - './prometheus/:/etc/prometheus/'
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
     ports:
       - "9090:9090"
-    
+
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -94,35 +89,3 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
-
-  # nginx:
-
-  #  build: .
-  #  restart: always
-
-  #  ports:
-  #    - "80:80"
-
-  #  depends_on:
-  #    - api
-  #    - game
-  
-  # nodeexporter:
-  #   image: prom/node-exporter:latest
-  #   container_name: nodeexporter
-  #   volumes:
-  #     - /proc:/host/proc:ro
-  #     - /sys:/host/sys:ro
-  #     - /:/rootfs:ro
-  #   command:
-  #     - '--path.procfs=/host/proc'
-  #     - '--path.sysfs=/host/sys'
-  #     - '--collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)'
-  #   restart: unless-stopped
-  #   deploy:
-  #     mode: global
-  #   ports:
-  #     - "9000:9000"
-    
-
-

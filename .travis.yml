@@ -3,8 +3,12 @@ services: [ docker ]
 branches: 
   only: [ master ]
 
+before_install:
+- sh ci/enviroment.sh
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+
 script:
-- docker-compose -p escapade build
+- sh ci/build.sh
 
 after_success:
 - sh succes.sh

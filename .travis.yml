@@ -5,10 +5,11 @@ branches:
 
 before_install:
 - sh ci/enviroment.sh
-- docker login -u $DOCKER_USER -p $DOCKER_PASS
 
 script:
 - sh ci/build.sh
+- docker login -u $DOCKER_USER -p $DOCKER_PASS
+- sh ci/push.sh
 
 after_success:
 - sh succes.sh

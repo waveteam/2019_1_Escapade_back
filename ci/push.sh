@@ -29,5 +29,5 @@ for NAME in         \
     history         \
     prometheus      \
 ; do 
-    push ${NAME} &
+    push ${NAME}
 done
